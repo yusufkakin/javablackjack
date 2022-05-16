@@ -10,6 +10,18 @@ public class CardDealer {
     private String cardType;
     private int cardValue;
 
+    //SHUFFLE A SUIT FOR THE CARDS
+    public static String getSuit(){
+        ArrayList<Suit> suits = new ArrayList<>();
+        Random random = new Random();
+        int nxt = random.nextInt(4);
+        suits.add(0, Suit.CLUB);
+        suits.add(1, Suit.SPADE);
+        suits.add(2, Suit.DIAMOND);
+        suits.add(3, Suit.HEART);
+        return String.valueOf(suits.get(nxt));
+    }
+
     //GET A RANDOMIZED CARD
     public String getCard() {
         dealCard();
@@ -65,9 +77,8 @@ public class CardDealer {
     }
 
     //RANDOMIZE THE CARDS/SHUFFLE
-    public int calculateCard() {
+    public void calculateCard() {
         card = random.nextInt(52) + 1;
-        return card;
     }
 
     //GET THE VALUE FOR THE CARD
@@ -80,3 +91,5 @@ public class CardDealer {
         return cardType;
     }
 }
+
+
