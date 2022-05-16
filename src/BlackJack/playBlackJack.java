@@ -40,7 +40,7 @@ public class playBlackJack {
                 scanner.nextLine();
                 String doubleDownChoice = scanner.nextLine();
                 //PROMPTS THE USER FOR DOUBLE DOWN
-                if(doubleDownChoice.equals("y")){
+                if(doubleDownChoice.equalsIgnoreCase("y")){
                     betInput *= 2;
                     System.out.println("Your bet is doubled at $" + betInput);
                     String ddcard1 = card.getCard();
@@ -78,7 +78,7 @@ public class playBlackJack {
                         System.out.println("BlackJack! Your balance is $" + playerMoney);
                     } else
                         System.out.println("It's a tie!");
-                } else if(doubleDownChoice.equals("n")){
+                } else if(doubleDownChoice.equalsIgnoreCase("n")){
                     if (playerTotal < 21) {
                         System.out.println("Would you like to (H)it or (S)tand?");
                         String playerChoice = scanner.nextLine();
