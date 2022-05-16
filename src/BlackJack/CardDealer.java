@@ -1,5 +1,6 @@
 package BlackJack;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class CardDealer {
@@ -79,4 +80,3 @@ public class CardDealer {
         return cardType;
     }
 }
-

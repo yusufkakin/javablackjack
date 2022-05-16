@@ -1,5 +1,7 @@
 package BlackJack;
 
+import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 public class playBlackJack {
@@ -33,8 +35,8 @@ public class playBlackJack {
                 int dealerCard2Value = card.getCardValue();
                 int playerTotal = card1Value + card2Value;
                 int dealerTotal = dealerCard1Value + dealerCard2Value;
-                System.out.println("Your cards are " + card1 + " and " + card2 + " with a total of: " + playerTotal);
-                System.out.println("Dealer cards are " + dealerCard1 + " and [Unrevealed]" + " with a total of: " + dealerCard1Value);
+                System.out.println("Your cards are " + card1 + " of " + getSuit() + " and " + card2 + " of " + getSuit() + " with a total of: " + playerTotal);
+                System.out.println("Dealer cards are " + dealerCard1 + " of " + getSuit() + " and [Unrevealed]" + " with a total of: " + dealerCard1Value);
                 //CHECKS THE TOTAL OF PLAYER'S CARD
                 if (playerTotal < 21) {
                     System.out.println("Would you like to (H)it or (S)tand?");
@@ -43,8 +45,10 @@ public class playBlackJack {
                     if (playerChoice.equalsIgnoreCase("h")) {
                         String card3 = card.getCard();
                         int card3Value = card.getCardValue();
-                        System.out.println("Your new card is a " + card3 + " with a value of " + card3Value);
+                        //STATEMENT FOR THE ACE VALUE
+                        if ((playerTotal + 11) > 21 && (card1Value == 11 || card2Value == 11)) playerTotal -= 10;
                         playerTotal += card3Value;
+                        System.out.println("Your new card is a " + card3 + " of " + getSuit() + " with a value of " + card3Value);
                         System.out.println("Now your total value is " + playerTotal);
                         if (playerTotal < 21) {
                             System.out.println("Would you like to (H)it or (S)tand?");
@@ -52,7 +56,9 @@ public class playBlackJack {
                             if (playerChoice2.equalsIgnoreCase("h")) {
                                 String card4 = card.getCard();
                                 int card4Value = card.getCardValue();
-                                System.out.println("Your new card is a " + card4 + " with a value of " + card4Value);
+                                //STATEMENT FOR THE ACE
+                                if ((playerTotal + 11) > 21 && card3Value == 11) playerTotal -= 10;
+                                System.out.println("Your new card is a " + card4 + " of " + getSuit() + " with a value of " + card4Value);
                                 playerTotal += card4Value;
                                 System.out.println("Now your total value is " + playerTotal);
                                 if (playerTotal < 21) {
@@ -61,7 +67,9 @@ public class playBlackJack {
                                     if (playerChoice3.equalsIgnoreCase("h")) {
                                         String card5 = card.getCard();
                                         int card5Value = card.getCardValue();
-                                        System.out.println("Your new card is a " + card5 + " with a value of " + card5Value);
+                                        //STATEMENT FOR THE ACE
+                                        if ((playerTotal + 11) > 21 && card4Value == 11) playerTotal -= 10;
+                                        System.out.println("Your new card is a " + card5 + " of " + getSuit() + " with a value of " + card5Value);
                                         playerTotal += card5Value;
                                         System.out.println("Your total value is: " + playerTotal);
 
@@ -71,17 +79,8 @@ public class playBlackJack {
                                         }
                                     }
                                 }
-                                if ((playerTotal + 11) > 21 && card4Value == 11) {
-                                    playerTotal -= 10;
-                                }
                             }
                         }
-                        if ((playerTotal + 11) > 21 && card3Value == 11) {
-                            playerTotal -= 10;
-                        }
-                    }
-                    if ((playerTotal + 11) > 21 && (card1Value == 11 || card2Value == 11)) {
-                        playerTotal -= 10;
                     }
                 }
 
@@ -90,13 +89,13 @@ public class playBlackJack {
                     playerMoney -= betInput;
                     continue;
                 }
-                System.out.println("Dealer flips over " + dealerCard2 + " with a value of " + dealerCard2Value);
+                System.out.println("Dealer flips over " + dealerCard2 + " of " + getSuit() + " with a value of " + dealerCard2Value);
                 System.out.println("Dealer total is " + dealerTotal);
 
                 while (dealerTotal < 17) {
                     String newDealerCard = card.getCard();
                     int newDealerCardValue = card.getCardValue();
-                    System.out.println("Dealer flips over a " + newDealerCard + " with a value of " + newDealerCardValue);
+                    System.out.println("Dealer flips over a " + newDealerCard + " of " + getSuit() + " with a value of " + newDealerCardValue);
                     dealerTotal += newDealerCardValue;
                     System.out.println("Dealer total is now: " + dealerTotal);
                 }
@@ -117,13 +116,24 @@ public class playBlackJack {
                 } else
                     System.out.println("It's a tie!");
 
-
                 System.out.println("Do you want to play again? Enter (Y)");
                 customerInput = scanner.nextLine();
 
             }
 
         }
+
+    }
+    //GETS A RANDOM SUIT FROM THE ENUM CLASS
+    public static String getSuit(){
+        ArrayList<Suit> suits = new ArrayList<>();
+        Random random = new Random();
+        int nxt = random.nextInt(4);
+        suits.add(0, Suit.CLUB);
+        suits.add(1, Suit.SPADE);
+        suits.add(2, Suit.DIAMOND);
+        suits.add(3, Suit.HEART);
+        return String.valueOf(suits.get(nxt));
     }
 }
 
