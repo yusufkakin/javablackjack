@@ -41,9 +41,8 @@ public class playBlackJack {
                 String doubleDownChoice = scanner.nextLine();
                 //PROMPTS THE USER FOR DOUBLE DOWN
                 if(doubleDownChoice.equals("y")){
-                    System.out.println("How much you want to bet?");
-                    int ddbet = scanner.nextInt();
-                    betInput += ddbet;
+                    betInput *= 2;
+                    System.out.println("Your bet is doubled at $" + betInput);
                     String ddcard1 = card.getCard();
                     int ddcardValue = card.getCardValue();
                     System.out.println("Your new card is a " + ddcard1 + " of " + CardDealer.getSuit() + " with a value of " + ddcardValue);
